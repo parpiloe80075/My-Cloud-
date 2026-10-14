@@ -1,0 +1,29 @@
+.hero{position:relative;isolation:isolate;background:#087fbd;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;inset:-14px;z-index:-1;pointer-events:none}
+.hero::before{background:url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=2000&q=85") center 46%/cover no-repeat;filter:blur(9px) brightness(.75);transform:scale(1.035);opacity:.8}
+.hero::after{inset:0;background:linear-gradient(115deg,#0875b4e8,#078bd2d9 56%,#03aadae6)}
+.hero-copy,.hero-dashboard-art{position:relative;z-index:1}
+.hero-copy{animation:reveal-up .7s both}
+.hero-dashboard-art{animation:reveal-up .85s .12s both}
+.hero h1{font-size:clamp(48px,6.3vw,76px);text-wrap:balance}
+.hero-copy>p{max-width:680px;font-size:18px;line-height:1.7}
+.hero-copy>p+p{margin-top:0}
+.hero-ctas .button{font-size:14px}
+.hero-ctas .text-link{font-size:15px}
+.trust{font-size:15px}
+.wordmark{display:inline-block;font-size:23px;font-weight:800;letter-spacing:-1.3px;line-height:1}
+.brand .brand-light{font-weight:400;color:#d5ecf6}
+.intro-section p,.ai-section p,.reporting-section p,.why-section>p,.final-cta>p,.content-lead{font-size:17px;line-height:1.75}
+.feature p,.portal-card p,.benefit-grid p,.plan-grid p,.faq-list details p{font-size:16px;line-height:1.7}
+.feature h3,.portal-card h3,.benefit-grid h3,.plan-grid h3{font-size:19px;line-height:1.3}
+.portal-card>span,.benefit-grid article>span{font-size:13px}
+.section-head>p{font-size:16px;line-height:1.7}
+.pricing-note{font-size:14px!important;line-height:1.6}
+.feature,.portal-card,.benefit-grid article,.plan-grid article,.faq-list details{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.feature:hover,.portal-card:hover,.benefit-grid article:hover,.plan-grid article:hover{transform:translateY(-4px);box-shadow:0 16px 35px #0c3e5618}
+.home-photo-strip>div{transition:transform .35s ease,filter .35s ease}
+.home-photo-strip>div:hover{transform:scale(1.025);filter:saturate(1.12)}
+.button,.text-link,.nav nav a,.faq-list summary,.plan-grid a{transition:color .2s ease,background .2s ease,transform .2s ease,box-shadow .2s ease}
+.section-head,.intro-section,.portals-section,.benefits-section,.reporting-section,.why-section,.pricing,.faq-section,.final-cta{animation:reveal-up .65s both;animation-timeline:view();animation-range:entry 0% entry 22%}
+@media(max-width:800px){.hero-copy>p{font-size:17px}.intro-section p,.ai-section p,.reporting-section p,.why-section>p,.final-cta>p,.content-lead{font-size:16px}.feature p,.portal-card p,.benefit-grid p,.plan-grid p,.faq-list details p{font-size:15px}}
+@media(max-width:650px){.hero{padding-top:39px}.hero h1{font-size:clamp(40px,10vw,54px);letter-spacing:-2.8px}.hero-copy>p{font-size:16px;line-height:1.65}.hero-ctas .button,.hero-ctas .text-link{font-size:14px}.trust{font-size:14px}.wordmark{font-size:21px}.intro-section p,.ai-section p,.reporting-section p,.why-section>p,.final-cta>p,.content-lead,.feature p,.portal-card p,.benefit-grid p,.plan-grid p,.faq-list details p{font-size:16px}.feature h3,.portal-card h3,.benefit-grid h3,.plan-grid h3{font-size:18px}.section-head>p{font-size:16px}}

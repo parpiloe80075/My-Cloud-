@@ -37,7 +37,8 @@ export async function GET(request: NextRequest) {
       const { data: { user } } = await client.auth.getUser();
       if (user) {
         const { data: membership } = await client.from("school_memberships").select("role").eq("user_id", user.id).eq("status", "active").maybeSingle();
-        response.headers.set("location", `${origin}${membership?.role === "teacher" ? "/teacher/home" : "/school/dashboard"}`);
+        const destination = membership?.role === "teacher" ? "/teacher/home" : membership?.role === "student" || membership?.role === "parent" ? "/profile" : membership?.role === "owner" || membership?.role === "administrator" ? "/school/dashboard" : "/register?google=1";
+        response.headers.set("location", `${origin}${destination}`);
       }
       return response;
     }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 import SiteFooter from "@/components/site-footer";
-import { ArrowRight, BookOpen, CalendarDays, ClipboardCheck, FileText, UserRound } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ClipboardCheck, FileText, UserRound, Sparkles } from "lucide-react";
 import "../../workspace.css";
 
 export const metadata: Metadata = { title: "Teacher Workspace | SatGold Cloud", description: "Access your teaching workspace, class activities and student progress reports." };
@@ -23,10 +23,11 @@ export default async function TeacherHome() {
     [ClipboardCheck, "Assessments", "Prepare and review academic work assigned to you.", "/features#tool-3"],
     [FileText, "Progress reports", "Review weekly student observations and report status.", "/assessments/progress-reports"],
     [CalendarDays, "School calendar", "Keep track of key school dates.", "/features#tool-2"],
+    [Sparkles, "AI materials", "Draft lesson plans, quizzes and study materials for educator review.", "/school/dashboard/ai-studio"],
   ] as const;
   return <main className="workspace-page">
     <header className="workspace-nav"><Link href="/profile" className="workspace-back"><UserRound size={17}/> My profile</Link><span>SatGold Cloud</span><form action="/auth/signout" method="post"><button className="workspace-signout">Sign out</button></form></header>
-    <section className="workspace-wrap"><div className="workspace-heading"><span className="workspace-icon"><BookOpen/></span><div><span className="workspace-kicker">TEACHER WORKSPACE</span><h1>Welcome, {String(user.user_metadata.full_name || "Teacher").split(" ")[0]}</h1><p>{school?.name || "School workspace"} · Your teaching overview</p></div></div>
+    <section className="workspace-wrap"><div className="workspace-heading"><span className="workspace-icon"><BookOpen/></span><div><span className="workspace-kicker">TEACHER WORKSPACE</span><h1>Welcome, {String(user.user_metadata.full_name || "Teacher").split(" ")[0]}</h1><p>{school?.name || "School workspace"} Â· Your teaching overview</p></div></div>
       <div className="workspace-metrics"><article><span>Assigned classes and subjects</span><strong>{assignmentCount ?? 0}</strong></article><article><span>Account</span><strong>Active</strong></article></div>
       <div className="workspace-tools-heading"><div><span className="workspace-kicker">YOUR WORKSPACE</span><h2>Teaching tools</h2></div></div>
       <div className="workspace-tools">{tools.map(([Icon,title,description,href])=><Link href={href} className="workspace-tool" key={title}><span><Icon size={20}/></span><div><h3>{title}</h3><p>{description}</p></div><ArrowRight size={17}/></Link>)}</div>

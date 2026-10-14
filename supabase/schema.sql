@@ -1,4 +1,4 @@
-﻿-- GENERATED SCHEMA SNAPSHOT for SatGold Cloud (PostgreSQL / Supabase).
+-- GENERATED SCHEMA SNAPSHOT for SatGold Cloud (PostgreSQL / Supabase).
 -- Canonical source: ordered files in supabase/migrations/.
 -- Apply either the timestamped migrations OR this complete snapshot to an empty project, never both.
 -- To update this reference file, concatenate all migration files in timestamp order.
@@ -121,7 +121,7 @@ begin
 end $$;
 revoke all on function public.provision_school_owner() from public;
 create trigger on_auth_user_confirmed_provision_school
-after insert or update of email_confirmed_at on auth.users
+after insert or update of email_confirmed_at, raw_user_meta_data on auth.users
 for each row when (new.email_confirmed_at is not null)
 execute function public.provision_school_owner();
 

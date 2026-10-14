@@ -6,7 +6,7 @@ export default function SiteFooter() {
   return <footer className="site-footer">
     <div className="site-footer-main">
       <div className="site-footer-brand">
-        <Link href="/" className="brand"><span className="brand-icon"><GraduationCap size={22}/></span><span>satgold<span className="brand-light">cloud</span></span></Link>
+        <Link href="/" className="brand"><span className="wordmark">satgold<span className="brand-light">cloud</span></span></Link>
         <p>AI powered school management software designed to connect school owners, administrators, teachers, students and parents through one organised digital platform.</p>
         <span className="site-footer-tag"><Sparkles size={14}/> AI powered school management</span>
       </div>
