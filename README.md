@@ -1,60 +1,31 @@
-﻿# SatGold Cloud
+# SatGold Cloud (starter, Milestone 1 and part of 2)
 
-SatGold Cloud is a Next.js App Router application for multi-tenant school management. This repository currently delivers the public website, registration flow, Supabase signup/session foundation, tenant schema and owner workspace entry point. It is a foundation, not a production-ready school management SaaS yet.
+## What is here
+Public pages (home, pricing, features, contact, login, register placeholder), design tokens, Supabase client, core SQL migration with RLS, Paystack initialize and webhook Edge Functions, role portal placeholders.
 
-## Current implementation
+## Milestone 2 addition
+Registration wizard (`register.html`), atomic `register_school()` in `0002_onboarding.sql` (school, owner membership, session, terms, classes, subjects, grading scale, trial, audit log), owner dashboard with setup checklist, trial countdown, payment button and history. Run migrations 0001 then 0002. In Supabase Auth settings keep "Confirm email" on and add your site URL to redirect URLs.
 
-- Responsive SatGold Cloud landing page and contact details.
-- Four-step school registration capture with client-side validation and review.
-- Supabase Auth email/password signup and email confirmation callback.
-- PostgreSQL trigger atomically creates a school, owner membership, academic configuration, seeded classes and subjects, audit event and eligible two-month trial after email confirmation.
-- Ordered PostgreSQL migrations for sessions, terms, classes, staff/students/guardians, enrollments, teacher assignments, CBT, answer keys, attempts, results, approvals, weekly reports, attendance, notifications, billing records and platform administration boundaries.
-- Tenant-aware RLS, permission catalogs, invitation acceptance, assessment grading/publication, result/report submission and review RPCs.
-- Idempotent reference catalog seeds for role permissions, unpriced plan tiers, and editable grading/report presets; no sample school records.
-- Owner-only workspace route, protected by server-side session and membership lookup.
-- Draft Privacy Policy and Terms pages; they require legal and operator review before commercial use.
+## What is NOT built yet
+Staff and student provisioning, remaining portal screens, CBT, results, report card PDFs, Gemini and Resend functions, Super Admin screens, legal pages, sitemap, automated tests. Nothing here has been run against Supabase, Paystack or Vercel.
 
-The SQL foundation defines the records and guarded database operations for academic, assessment, result, report, attendance, notification and billing workflows. Most application screens and server routes that call these operations are still pending, as are PDF generation, Gemini, Resend, verified payment webhooks and a platform-admin console. No payment or AI action is claimed operational.
+## Database
+The Supabase project `SatGold Cloud` (ref kykubgufjrmylfdoykgc) already contained the core schema (schools, school_memberships, RLS, `provision_school_owner` trigger, assessments, results and more). The only change applied now is `supabase/migrations/20261014_pricing_per_term_and_contact_submissions.sql`: per term billing interval, Starter 2300000 kobo, Growth 5000000 kobo, Custom (enterprise) contact only, and a `contact_submissions` table with RLS. Do not run any other SQL from older zips.
 
-## Local setup
+## Registration flow
+The wizard signs up with `registration` metadata. The live trigger creates the school, owner membership, classes, subjects, academic settings and the two month trial when the owner confirms their email.
 
-1. Install Node.js 20.9 or newer.
-2. Copy `.env.example` to `.env.local` and configure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` from a Supabase project.
-3. Apply the ordered files in `supabase/migrations/` to the Supabase PostgreSQL database. `supabase/schema.sql` is a complete fresh-project snapshot; do not apply it in addition to migrations.
-4. In Supabase Auth, enable email/password sign-in and configure the site URL and redirect URL to `http://localhost:3000/auth/callback` (plus your deployed domain callback).
-5. Run `npm install`, then `npm run dev`.
+## Setup
+1. Put the project URL and publishable key in `config.js`.
+2. Supabase Auth: keep Confirm email on, set Site URL and redirect URLs to your domain.
+3. Deploy functions: `supabase functions deploy paystack-initialize paystack-webhook`.
+4. Secrets: `supabase secrets set PAYSTACK_SECRET_KEY=... SUPABASE_SECRET_KEY=... APP_BASE_URL=... PERIOD_DAYS=90`.
+5. Paystack dashboard: webhook URL = the paystack-webhook function URL. Test keys first.
+6. First Super Admin: add your user id to `platform_admins` in the SQL editor.
+7. Deploy to Vercel and connect satgoldcloud.name.ng.
 
-Supabase signup email confirmation should remain enabled for deployment. After email confirmation, the auth trigger provisions the school, initial classes and subjects, membership and trial as one database transaction. Do not disable the trigger or grant client users direct ability to set membership roles. Keep the service-role key out of the browser; this foundation does not use it.
+## Money
+Amounts are in kobo (`price_minor`, `amount_minor`).
 
-## Environment variables
-
-Required for registration and login:
-
-- `NEXT_PUBLIC_APP_URL`: application origin (currently callback uses the active request origin).
-- `NEXT_PUBLIC_SUPABASE_URL`: Supabase project URL.
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabase publishable/anon key.
-
-Future server-only integrations (not yet connected): `SUPABASE_SERVICE_ROLE_KEY`, `GEMINI_API_KEY`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `PAYMENT_PROVIDER_SECRET_KEY`, `PAYMENT_PROVIDER_WEBHOOK_SECRET`. Configure secrets in Vercel and never use a `NEXT_PUBLIC_` prefix for them.
-
-## Database and authorization
-
-The database uses PostgreSQL/Supabase. It assigns the `owner` role in a database trigger and derives membership and permission helpers from `auth.uid()`. Tenant-owned records include a school identifier and RLS policies; child records also use tenant-scoped foreign keys. Student passcodes have a hash-only column with no client read/write grant. CBT answer keys are stored separately from student-readable questions. Approval and payment writes stay behind database functions or server credentials. Review the SQL and test tenant isolation on a disposable Supabase project before any real student information is stored.
-
-See [`supabase/README.md`](supabase/README.md) for local reset, linked-project migration, seed behavior and the no-reset-on-production rule.
-
-## Deployment status
-
-No Supabase project or credentials were provided, so the migration has not been applied to a live database. No Vercel project or domain is connected. No third-party credentials are configured. Automated tests and production security checks have not been run. Do not onboard real schools until the remaining workflows, policies, retention controls, monitoring, backups and legal documents are implemented and verified.
-
-## Next implementation phases
-
-1. Complete auth roles, invitations, administrator permission checks and tenant-isolation testing.
-2. Add school settings CRUD and academic calendar/session, class, subject and grading configuration.
-3. Implement staff, student and guardian records and role-specific dashboards.
-4. Build assessments, attempts, grading and results approval.
-5. Add weekly report workflows, PDF reports and notifications.
-6. Integrate email and AI behind server authorization and usage controls.
-7. Add plans, payment verification/webhooks and platform administration.
-8. Add automated tests, operational monitoring, backup/restore documentation and production review.
-
-
+## Known gaps to decide
+Term length (PERIOD_DAYS is an assumption), final Growth plan name, refund terms.
