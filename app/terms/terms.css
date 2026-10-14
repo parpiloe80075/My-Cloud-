@@ -2,3 +2,4 @@
 .legal-page{min-height:100vh;background:radial-gradient(ellipse at 15% 0,#bef2e73b,transparent 32%),#f7faf9}.legal-page article{padding:38px 42px;background:#ffffffcc;border:1px solid #dceae6;border-radius:19px;box-shadow:0 20px 65px #174c4310}.legal-page h1{letter-spacing:-1.8px}.legal-page h2{color:#193c39}.legal-page article>p{color:#637975}.legal-page a:not(.brand){color:#16877b}
 @media(max-width:600px){.legal-page article{margin:35px auto;padding:25px 21px;border-radius:15px}.legal-page h1{font-size:34px}}
 .legal-page{max-width:none;padding:35px 0 0}.legal-page>.site-footer{margin-top:10px}
+.legal-page{background:radial-gradient(ellipse at 15% 0,#d9f3fc,transparent 32%),#f6f7f8}.legal-page article{border-color:#e6e9eb;box-shadow:0 18px 55px #1237490d}.legal-page h2{color:#18262c}.legal-page a:not(.brand){color:#087fbd}
