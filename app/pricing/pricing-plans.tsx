@@ -22,7 +22,7 @@ export default function PricingPlans() {
     <section className="pricing-plan-grid" aria-label="Subscription plans">
       {plans.map((plan, index) => <article className={`pricing-plan ${index === 0 ? "pricing-plan-primary" : ""}`} key={plan.name}>
         <span className="pricing-plan-index">0{index + 1}</span><h2>{plan.name}</h2>
-        <h3><span className="pricing-currency">₦</span>{naira.format(plan.termPrice * multiplier)} <small>per {period}</small></h3>
+        <h3>NGN {naira.format(plan.termPrice * multiplier)} <small>per {period}</small></h3>
         <p>{plan.description}</p><p>{plan.review}</p>
         <Link className={index === 0 ? "button button-dark" : "button pricing-outline"} href="/register">{plan.action} <ArrowRight size={16}/></Link>
       </article>)}

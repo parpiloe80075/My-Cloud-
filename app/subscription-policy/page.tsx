@@ -22,8 +22,8 @@ export default function SubscriptionPolicy() {
 
       <h2>1. Available Subscription Plans</h2>
       <p>SatGold Cloud advertises the following subscription options:</p>
-      <p><strong>Starter Plan</strong></p><p>₦23,000 per academic term.</p>
-      <p><strong>School Plan</strong></p><p>₦50,000 per academic term. Confirm the official plan name and included features before publication.</p>
+      <p><strong>Starter Plan</strong></p><p>NGN 23,000 per academic term.</p>
+      <p><strong>School Plan</strong></p><p>NGN 50,000 per academic term. Confirm the official plan name and included features before publication.</p>
       <p><strong>Custom Plan</strong></p><p>Schools with additional requirements can contact our team to discuss available custom services and receive a quotation.</p>
       <p>The final price, applicable taxes if any, included features, usage limits and other conditions should be confirmed before a subscription is purchased.</p>
 

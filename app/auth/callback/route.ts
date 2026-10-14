@@ -33,7 +33,14 @@ export async function GET(request: NextRequest) {
     );
 
     const { error } = await client.auth.exchangeCodeForSession(code);
-    if (!error) return response;
+    if (!error) {
+      const { data: { user } } = await client.auth.getUser();
+      if (user) {
+        const { data: membership } = await client.from("school_memberships").select("role").eq("user_id", user.id).eq("status", "active").maybeSingle();
+        response.headers.set("location", `${origin}${membership?.role === "teacher" ? "/teacher/home" : "/school/dashboard"}`);
+      }
+      return response;
+    }
   }
 
   return NextResponse.redirect(`${origin}/login?error=confirmation`);

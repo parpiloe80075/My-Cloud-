@@ -39,8 +39,8 @@ const benefits = [
 ] as const;
 
 const plans = [
-  ["Starter Package", "â‚¦23,000 per term", "A practical starting point for schools looking to manage their essential administrative and academic activities through one connected platform."],
-  ["Professional Package", "â‚¦50,000 per term", "An expanded package for schools that require additional capabilities and higher configured usage limits."],
+  ["Starter Package", "NGN 23,000 per term", "A practical starting point for schools looking to manage their essential administrative and academic activities through one connected platform."],
+  ["Professional Package", "NGN 50,000 per term", "An expanded package for schools that require additional capabilities and higher configured usage limits."],
   ["Custom Package", "Talk to our team", "Contact our support team for a package tailored to your school's specific requirements, including eligible website, branding and custom domain options."],
 ] as const;
 
@@ -52,7 +52,7 @@ const faqs = [
   ["Can parents view their children's results?", "Parents can access their linked children's published results and reports when the school has made those records available through the parent portal."],
   ["Can my school customise its grading system?", "SatGold Cloud supports configurable assessment categories and grading rules so schools can organise calculations according to their academic structure and requirements."],
   ["Does SatGold Cloud provide AI assistance?", "Yes. The platform includes AI assisted functionality designed to support selected teaching and administrative tasks. Available capabilities depend on the configured features and applicable subscription limits."],
-  ["How much does SatGold Cloud cost?", "The published Starter package costs â‚¦23,000 per term, while the Professional package costs â‚¦50,000 per term. A Custom package is available for schools that need tailored arrangements. Eligible new schools can also access a two month free trial."],
+  ["How much does SatGold Cloud cost?", "The published Starter package costs NGN 23,000 per term, while the Professional package costs NGN 50,000 per term. A Custom package is available for schools that need tailored arrangements. Eligible new schools can also access a two month free trial."],
   ["How do I register my school?", "Visit the registration page, provide your school information, complete the required setup steps and configure your academic environment to get started."],
 ] as const;
 
